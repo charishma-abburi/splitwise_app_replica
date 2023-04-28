@@ -50,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 elevation: 3,
-                backgroundColor: Color.fromRGBO(76, 187, 155, 1),
-                minimumSize: Size(350, 50),
+                backgroundColor: const Color.fromRGBO(76, 187, 155, 1),
+                minimumSize: const Size(350, 50),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/signup');
@@ -62,8 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(225, 255, 255, 255),
-                minimumSize: Size(350, 50),
+                backgroundColor: const Color.fromARGB(225, 255, 255, 255),
+                minimumSize: const Size(350, 50),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
@@ -79,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(225, 255, 255, 255),
-                minimumSize: Size(350, 50),
+                backgroundColor: const Color.fromARGB(225, 255, 255, 255),
+                minimumSize: const Size(350, 50),
               ),
               onPressed: () {
                 // TODO: Implement login functionality
