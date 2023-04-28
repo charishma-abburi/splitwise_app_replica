@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logging/logging.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,9 +16,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final FocusNode _passwordFocusNode = FocusNode();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final Logger _logger = Logger('my_app_logger');
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
+        print("hi");
+      print(email);
+      print(password);
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -24,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -105,21 +113,44 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  final UserCredential userCredential =
-                      await _auth.signInWithEmailAndPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
+                 // final UserCredential userCredential =
+                      await signInWithEmailAndPassword(
+                     _emailController.text,
+                    _passwordController.text,
                   );
-                  final User? user = userCredential.user;
+                  final User? user = _auth.currentUser;
                   if (user != null) {
+                      print(
+                            'User: ${user.displayName}');
+                    print(_emailController.text);
+                    await FirebaseAuth.instance.signOut();
+                    Fluttertoast.showToast(
+                        msg: "Login successful",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white);
+                    Navigator.of(context).pushNamed('/');
                     // Navigate to home screen or perform any action after successful login
-                    print("hi");
+                    // print("hi");
                   }
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'user-not-found') {
                     print('No user found for that email.');
+                    Fluttertoast.showToast(
+                        msg: "No user found for that email.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white);
                   } else if (e.code == 'wrong-password') {
                     print('Wrong password provided for that user.');
+                    Fluttertoast.showToast(
+                        msg: "Wrong password provided for that user.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white);
                   }
                 } catch (e) {
                   print(e);
