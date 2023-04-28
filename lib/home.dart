@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    final DatabaseService _db = DatabaseService();
+    // final DatabaseService _db = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 minimumSize: const Size(350, 50),
               ),
               onPressed: () {
-                 dynamic result = await _auth.googleLogIn();
-                await _db.CreateUser(
-                    result.uid, result.email, result.password, result.name);
-                if (result == null) {
-                  print("ERROR!!");
-                } else {
-                  print("GR* SUCSES");
-                }
+                //  dynamic result = await _auth.googleLogIn();
+                // await _db.CreateUser(
+                //     result.uid, result.email, result.password, result.name);
+                // if (result == null) {
+                //   print("ERROR!!");
+                // } else {
+                //   print("GR* SUCSES");
+                // }
               },
                 // TODO: Implement login functionality
               

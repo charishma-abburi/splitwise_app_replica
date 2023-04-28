@@ -14,7 +14,7 @@ lib/data
 lib/models/
 lib/provider
 lib/screen
-lib/services
+# lib/services
 lib/src
 lib/Tab_pages
 lib/test

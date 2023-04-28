@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logging/logging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
-import 'package:splitwise_app_replica/homepage.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -135,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                              setState(() {
                               error = '';
                             });
-                        Navigator.of(context).pushNamed('/homepage');
+                        Navigator.of(context).pushNamed('/');
                         // Navigate to home screen or perform any action after successful login
                         // print("hi");
               
@@ -168,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: Color.fromRGBO(76, 187, 155, 1),
                   minimumSize: Size(100, 45),
                 ),
-                child: const Text('Log in'),
+                child: const Text('Log out'),
               ),
               const SizedBox(height: 16),
               TextButton(
