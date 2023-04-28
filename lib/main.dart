@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/animation.dart';
+import 'package:splitwise_app_replica/group_page.dart';
 import 'package:splitwise_app_replica/login.dart';
 import 'package:splitwise_app_replica/signup.dart';
 import 'package:splitwise_app_replica/home.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/homepage' : (context) => const HomePage(),
+        '/groupscreen' :(context) =>  GroupScreen(),
       },
     );
   }

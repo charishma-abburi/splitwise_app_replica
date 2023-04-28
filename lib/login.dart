@@ -4,7 +4,7 @@ import 'package:logging/logging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
 import 'package:splitwise_app_replica/homepage.dart';
-
+import 'package:splitwise_app_replica/group_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -172,7 +172,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                     //await FirebaseAuth.instance.sendPasswordResetEmail(email:currentUser.email!);
+
                   // TODO: Implement forgot password functionality
                 },
                 child: const Text(

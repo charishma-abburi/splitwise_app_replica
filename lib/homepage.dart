@@ -6,6 +6,8 @@ import 'package:splitwise_app_replica/signup.dart';
 import 'package:splitwise_app_replica/expenses.dart';
 import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/account.dart';
+import 'package:splitwise_app_replica/group_page.dart';
+
 
 import 'bottomnavbar.dart';
 
@@ -77,6 +79,15 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
+
+    if (index == 0) {
+    // Handle Account tab tap event here
+    // For example, navigate to the account screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => GroupScreen()),
+    );
+  }
 
    if (index == 3) {
     // Handle Account tab tap event here
