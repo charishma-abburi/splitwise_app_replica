@@ -132,13 +132,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.green,
                             textColor: Colors.white);
-                             setState(() {
-                              error = '';
-                            });
+                        setState(() {
+                          error = '';
+                        });
                         Navigator.of(context).pushNamed('/homepage');
                         // Navigate to home screen or perform any action after successful login
                         // print("hi");
-              
                       }
                     }
                   } on FirebaseAuthException catch (e) {
@@ -173,8 +172,18 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () async {
-                     //await FirebaseAuth.instance.sendPasswordResetEmail(email:currentUser.email!);
-
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user != null) {
+                    String email = user.email.toString();
+                    await FirebaseAuth.instance
+                        .sendPasswordResetEmail(email: email);
+                         Fluttertoast.showToast(
+                          msg: "Password reset sent to the mail.",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white);
+                  }
                   // TODO: Implement forgot password functionality
                 },
                 child: const Text(

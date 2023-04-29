@@ -1,4 +1,6 @@
+// import 'dart:ffi';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/animation.dart';
@@ -7,6 +9,8 @@ import 'package:splitwise_app_replica/login.dart';
 import 'package:splitwise_app_replica/signup.dart';
 import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/homepage.dart';
+import 'package:splitwise_app_replica/services/auth.dart';
+import 'package:splitwise_app_replica/services/database.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +36,8 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => const HomeScreen(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
-        '/homepage' : (context) => const HomePage(),
-        '/groupscreen' :(context) =>  GroupScreen(),
+        '/homepage': (context) => const HomePage(),
+        '/groupscreen': (context) => GroupScreen(),
       },
     );
   }
@@ -47,6 +51,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final AuthService _auth = AuthService();
+  final DatabaseService _db = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,8 +96,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: const Color.fromARGB(225, 255, 255, 255),
                 minimumSize: const Size(350, 50),
               ),
-              onPressed: () {
+              onPressed: () async {
                 // TODO: Implement login functionality
+                try {
+                  dynamic result = await _auth.googleLogIn();
+                  String phonenum = "";
+                  String phonecode = "";
+                  print("hi");
+                  print(result.uid);
+                  print(result.name);
+                  await _db.CreateUser(result.uid, result.email,
+                      result.password, result.name, phonenum, phonecode);
+                  if (result == null) {
+                    print("ERROR!!");
+                    print("hii");
+                  } else {
+                    print("hiii");
+                    Navigator.of(context).pushNamed('/homepage');
+
+                    print("GR* SUCSES");
+                  }
+                } catch (e) {
+                  print(e);
+                }
               },
               child: const Text(
                 'Sign in with Google',
@@ -106,76 +133,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:provider/provider.dart';
-// import 'package:splitwise_app_replica/models/user.dart';
-// import 'package:splitwise_app_replica/src/authenticate/register.dart';
-// import 'package:splitwise_app_replica/src/authenticate/signin.dart';
-// import 'package:splitwise_app_replica/src/wrapper.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:splitwise_app_replica/services/auth.dart';
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamProvider<myUser?>.value(
-//       value: AuthService().user,
-//       initialData: null,
-//       child: MaterialApp(
-//         title: 'Campus Splitwise',
-//         theme: ThemeData(
-//             brightness: Brightness.dark
-//         ),
-//         home: Wrapper(),
-//         debugShowCheckedModeBanner: false,
-//         onGenerateRoute: RouteMaker.generateRoute,
-//       ),
-
-//     );
-//   }
-// }
-
-// class RouteMaker {
-//   static Route<dynamic> generateRoute(RouteSettings settings) {
-//     final args = settings.arguments;
-//     switch (settings.name) {
-//       case Register.id:
-//         return MaterialPageRoute(builder: (context) => Register());
-//       case SignIn.id:
-//         return MaterialPageRoute(builder: (context) => SignIn());
-//       default:
-//         return _errorRoute();
-//     }
-//   }
-//   static Route<dynamic> _errorRoute() {
-//     return MaterialPageRoute(builder: (_) {
-//       return Scaffold(
-//         appBar: AppBar(
-//           title: Text('Error'),
-//         ),
-//         body: const Center(
-//           child: Text('ERROR'),
-//         ),
-//       );
-//     });
-//   }
-// }
-
-
-
-
-

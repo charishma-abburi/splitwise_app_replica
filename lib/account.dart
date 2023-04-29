@@ -29,6 +29,7 @@ class _AccountScreenState extends State<AccountScreen> {
     try {
       await FirebaseAuth.instance.signOut();
       // Navigator.of(context).pushReplacementNamed('/login'); // navigate to login screen
+      //Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
       Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     } catch (e) {
       print(e.toString());
