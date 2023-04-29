@@ -3,14 +3,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:splitwise_app_replica/animation.dart';
-import 'package:splitwise_app_replica/group_page.dart';
-import 'package:splitwise_app_replica/login.dart';
-import 'package:splitwise_app_replica/signup.dart';
+import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
+import 'package:splitwise_app_replica/Screens/GroupScreens/group_page.dart';
+import 'package:splitwise_app_replica/Screens/Authentication/login.dart';
+import 'package:splitwise_app_replica/Screens/Authentication/signup.dart';
 import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/homepage.dart';
-import 'package:splitwise_app_replica/services/auth.dart';
-import 'package:splitwise_app_replica/services/database.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

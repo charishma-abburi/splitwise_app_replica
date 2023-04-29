@@ -51,10 +51,10 @@
 //   }
 // }
 import 'package:flutter/material.dart';
-import 'package:splitwise_app_replica/group_page.dart';
-import 'package:splitwise_app_replica/addfriend.dart';
-import 'package:splitwise_app_replica/account.dart';
-import 'package:splitwise_app_replica/activityscreen.dart';
+import 'package:splitwise_app_replica/Screens/GroupScreens/group_page.dart';
+import 'package:splitwise_app_replica/Screens/FriendsScreen/addfriend.dart';
+import 'package:splitwise_app_replica/Screens/Authentication/account.dart';
+import 'package:splitwise_app_replica/Screens/ActivityScreen/activityscreen.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;

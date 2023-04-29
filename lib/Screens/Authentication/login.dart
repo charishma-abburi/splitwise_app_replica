@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logging/logging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
+import 'package:splitwise_app_replica/Screens/GroupScreens/homepage.dart';
+import 'package:splitwise_app_replica/Screens/GroupScreens/group_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -133,8 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                              setState(() {
                               error = '';
                             });
-
-                           Navigator.of(context).pushNamed('/');
+                        Navigator.of(context).pushNamed('/homepage');
                         // Navigate to home screen or perform any action after successful login
                         // print("hi");
               
@@ -167,11 +168,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: Color.fromRGBO(76, 187, 155, 1),
                   minimumSize: Size(100, 45),
                 ),
-                child: const Text('Log out'),
+                child: const Text('Log in'),
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                     //await FirebaseAuth.instance.sendPasswordResetEmail(email:currentUser.email!);
+
                   // TODO: Implement forgot password functionality
                 },
                 child: const Text(
