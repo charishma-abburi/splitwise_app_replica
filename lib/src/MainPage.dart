@@ -3,6 +3,7 @@ import 'package:splitwise_app_replica/src/groups/groups_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/src/friends/friends.dart';
 import 'package:splitwise_app_replica/src/activity_page.dart';
+import 'package:splitwise_app_replica/src/debt_management.dart';
 
 class MainPage extends StatefulWidget {
   final String uid;
@@ -23,7 +24,7 @@ class _MainPageState extends State<MainPage> {
   String _title = 'Your Groups';
   final List<Widget> _screens = [
     const GroupsPage(),
-    const ActivityPage(),
+  const ActivityPage(),
     const FriendsPage(),
     const AccountPage(),
   ];
