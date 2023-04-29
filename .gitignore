@@ -11,11 +11,11 @@
 migrate_working_dir/
 lib/algorithm
 lib/data
-lib/models/
+# lib/models/
 lib/provider
 lib/screen
 # lib/services
-lib/src
+# lib/src
 lib/Tab_pages
 lib/test
 lib/widget

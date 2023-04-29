@@ -253,10 +253,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             await _db.CreateUser(
                                 result.uid,
                                 _emailController.text,
-                                _passwordController.text,
+                               
                                 _fullNameController.text,
-                                _phoneController.text,
-                                _selectedCountryCode);
+                                // _phoneController.text,
+                                // _selectedCountryCode
+                                );
                             setState(() {
                               error = '';
                             });
