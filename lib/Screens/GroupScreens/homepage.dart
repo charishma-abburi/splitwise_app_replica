@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/login.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/signup.dart';
 import 'package:splitwise_app_replica/Screens/Expenses/expenses.dart';
+import 'package:splitwise_app_replica/Screens/GroupScreens/showAllGroups.dart';
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/account.dart';
 import 'package:splitwise_app_replica/Screens/GroupScreens/group_page.dart';
@@ -25,13 +26,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    const amountTextStyle = TextStyle(
+      color: Colors.amber,
+      fontSize: 20.0
+    );
+
     return Scaffold(
       appBar: AppBar(
         // title: Text("HomePage"),
         backgroundColor: Colors.white,
      
         actions:[ IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.group_add,
             color:Colors.black
           ),
@@ -41,20 +48,60 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
-              children: [
-                Text("Overall you owe "),
-                Text(
-                  this.oweAmount.toString(),
-                  style: TextStyle(
-                    color: Colors.amber
-                  ),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget> [
+                Row(
+                  children: [
+                    const Text(
+                      "Overall you owe ",
+                      style: TextStyle(
+                        fontSize: 20.0
+                      ),
+                    ),
+                    Text(
+                      currencySymbols["rupee"],
+                      style: amountTextStyle,
+                    ),
+                    Text(
+                      oweAmount.toString(),
+                      style: amountTextStyle,
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.tune),
+                  iconSize: 35.0,
                 )
               ],
+            ),
+
+            AllGroups(),
+
+            TextButton.icon(
+              onPressed: () {},
+              label: const Text(
+                "Start a new group",
+                style: TextStyle(
+                  color: Colors.green
+                ),
+              ),
+              icon: const Icon(
+                Icons.group_add,
+                color: Colors.green,
+              ),
+              style: TextButton.styleFrom(
+                side: const BorderSide(
+                  width: 1.0,
+                  color: Colors.green
+                )
+              )
             )
            
           ],
@@ -71,7 +118,10 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(builder: (context) => NewExpenseScreen()),
           );
         },
-        label:Text("Add Expense"),
+        icon: const ImageIcon(
+          AssetImage("assets/expenseIcon2.jpg"),
+        ),
+        label:const Text("Add Expense"),
         backgroundColor: Colors.green,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
