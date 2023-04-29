@@ -173,6 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () async {
+
+                  
                      //await FirebaseAuth.instance.sendPasswordResetEmail(email:currentUser.email!);
 
                   // TODO: Implement forgot password functionality

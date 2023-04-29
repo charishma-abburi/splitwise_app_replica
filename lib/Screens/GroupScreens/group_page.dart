@@ -64,6 +64,7 @@ class _GroupScreenState extends State<GroupScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Members to Group'),
+        backgroundColor:  const Color.fromRGBO(76, 187, 155, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -117,6 +118,15 @@ class _GroupScreenState extends State<GroupScreen> {
               ElevatedButton(
                 onPressed: _addMember,
                 child: Text('Add Member'),
+                style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return const Color.fromRGBO(76, 187, 155, 1);
+                        }
+                        return const Color.fromRGBO(76, 187, 155, 1);
+                      }),
+                    ),
               ),
               SizedBox(height: 16.0),
               Text(
@@ -125,6 +135,7 @@ class _GroupScreenState extends State<GroupScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
                 ),
+               
               ),
               SizedBox(height: 8.0),
               Expanded(
@@ -149,6 +160,15 @@ class _GroupScreenState extends State<GroupScreen> {
                     },
                     icon: Icon(Icons.sms),
                     label: Text('Send SMS'),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return const Color.fromRGBO(76, 187, 155, 1);
+                        }
+                        return const Color.fromRGBO(76, 187, 155, 1);
+                      }),
+                    ),
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
@@ -157,7 +177,18 @@ class _GroupScreenState extends State<GroupScreen> {
                       launch(url);
                     },
                     icon: Icon(Icons.email),
-                    label: Text('Send Email'),
+                    label: Text(
+                      'Send Email',
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return const Color.fromRGBO(76, 187, 155, 1);
+                        }
+                        return const Color.fromRGBO(76, 187, 155, 1);
+                      }),
+                    ),
                   ),
                 ],
               ),

@@ -9,7 +9,6 @@ import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/account.dart';
 import 'package:splitwise_app_replica/Screens/GroupScreens/group_page.dart';
 
-
 import '../../bottomnavbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,24 +25,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    const amountTextStyle = TextStyle(
-      color: Colors.amber,
-      fontSize: 20.0
-    );
+    const amountTextStyle = TextStyle(color: Colors.amber, fontSize: 20.0);
 
     return Scaffold(
       appBar: AppBar(
         // title: Text("HomePage"),
         backgroundColor: Colors.white,
-     
-        actions:[ IconButton(
-          icon: const Icon(
-            Icons.group_add,
-            color:Colors.black
-          ),
-            onPressed: () {
 
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.group_add, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GroupScreen()),
+              );
             },
           ),
         ],
@@ -55,14 +51,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget> [
+              children: <Widget>[
                 Row(
                   children: [
                     const Text(
                       "Overall you owe ",
-                      style: TextStyle(
-                        fontSize: 20.0
-                      ),
+                      style: TextStyle(fontSize: 20.0),
                     ),
                     Text(
                       currencySymbols["rupee"],
@@ -81,29 +75,24 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-
             AllGroups(),
-
             TextButton.icon(
-              onPressed: () {},
-              label: const Text(
-                "Start a new group",
-                style: TextStyle(
-                  color: Colors.green
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GroupScreen()),
+                  );
+                },
+                label: const Text(
+                  "Start a new group",
+                  style: TextStyle(color:  const Color.fromRGBO(76, 187, 155, 1),),
                 ),
-              ),
-              icon: const Icon(
-                Icons.group_add,
-                color: Colors.green,
-              ),
-              style: TextButton.styleFrom(
-                side: const BorderSide(
-                  width: 1.0,
-                  color: Colors.green
-                )
-              )
-            )
-           
+                icon: const Icon(
+                  Icons.group_add,
+                  color:  const Color.fromRGBO(76, 187, 155, 1),
+                ),
+                style: TextButton.styleFrom(
+                    side: const BorderSide(width: 1.0, color:  const Color.fromRGBO(76, 187, 155, 1),)))
           ],
         ),
       ),
@@ -121,8 +110,8 @@ class _HomePageState extends State<HomePage> {
         icon: const ImageIcon(
           AssetImage("assets/expenseIcon2.jpg"),
         ),
-        label:const Text("Add Expense"),
-        backgroundColor: Colors.green,
+        label: const Text("Add Expense"),
+        backgroundColor:  const Color.fromRGBO(76, 187, 155, 1),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -133,24 +122,13 @@ class _HomePageState extends State<HomePage> {
       _currentIndex = index;
     });
 
-    if (index == 0) {
-    // Handle Account tab tap event here
-    // For example, navigate to the account screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => GroupScreen()),
-    );
-  }
-
-   if (index == 3) {
-    // Handle Account tab tap event here
-    // For example, navigate to the account screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => AccountScreen()),
-    );
-  }
-
+    if (index == 3) {
+      // Handle Account tab tap event here
+      // For example, navigate to the account screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AccountScreen()),
+      );
+    }
   }
 }
-

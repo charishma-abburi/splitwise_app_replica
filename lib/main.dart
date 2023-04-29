@@ -7,8 +7,10 @@ import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
 import 'package:splitwise_app_replica/Screens/GroupScreens/group_page.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/login.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/signup.dart';
-import 'package:splitwise_app_replica/home.dart';
-import 'package:splitwise_app_replica/homepage.dart';
+import 'package:splitwise_app_replica/Screens/GroupScreens/homepage.dart';
+import 'package:splitwise_app_replica/services/auth.dart';
+import 'package:splitwise_app_replica/services/database.dart';
+
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
