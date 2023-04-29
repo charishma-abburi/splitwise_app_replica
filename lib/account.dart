@@ -18,7 +18,7 @@ class _AccountScreenState extends State<AccountScreen> {
           child: Text('Logout'),
           onPressed: () {
             signOut();
-             Navigator.of(context).pushNamed('/home');
+             // Navigator.of(context).pushNamed('/home');
           },
         ),
       ),
@@ -28,7 +28,8 @@ class _AccountScreenState extends State<AccountScreen> {
   Future<void> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      Navigator.of(context).pushReplacementNamed('/login'); // navigate to login screen
+      // Navigator.of(context).pushReplacementNamed('/login'); // navigate to login screen
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     } catch (e) {
       print(e.toString());
     }

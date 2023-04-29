@@ -133,7 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                              setState(() {
                               error = '';
                             });
-                        Navigator.of(context).pushNamed('/');
+
+                           Navigator.of(context).pushNamed('/');
                         // Navigate to home screen or perform any action after successful login
                         // print("hi");
               
