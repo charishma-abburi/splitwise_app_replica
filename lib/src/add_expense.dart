@@ -48,44 +48,42 @@ class _AddExpenseState extends State<AddExpense> {
             ),
           ],
         ),
-        body: ListView(
-          children: <Widget>[
-            Column(
+        body: ListView(children: <Widget>[
+          Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              
-              children:<Widget> [
+              children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 10),
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
-                  child:
-                  Row(children: [
-                    Text('Paid by', style: TextStyle( fontSize: 20)),
-                    SizedBox(width: 10),
-                    Container(
-                      // make rounded
-                      padding: const EdgeInsets.fromLTRB(20,5,20,5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.greenAccent,
-                          width: 1,
+                    margin: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                    child: Row(
+                      children: [
+                        Text('Paid by', style: TextStyle(fontSize: 20)),
+                        SizedBox(width: 10),
+                        Container(
+                          // make rounded
+                          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.greenAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(friend['name'],
+                              style: TextStyle(
+                                fontSize: 18,
+                              )),
                         ),
-                      ),
-                      child:
-                          Text(friend['name'], style: TextStyle( fontSize: 18,)),
-                    ),
-                  ],)
-                )
-                    ,
+                      ],
+                    )),
                 Container(
                   margin: EdgeInsets.only(left: 15),
                   padding: const EdgeInsets.fromLTRB(15, 0, 20, 20),
                   child:
-                    Text('and split equally', style: TextStyle( fontSize: 18)),
+                      Text('and split equally', style: TextStyle(fontSize: 18)),
                 ),
-              ]
-            ),
+              ]),
           Form(
             key: _formKey,
             child: Column(
@@ -97,11 +95,10 @@ class _AddExpenseState extends State<AddExpense> {
                     children: [
                       const Expanded(
                         flex: 1,
-                        child:  Icon(
+                        child: Icon(
                           Icons.note_add,
                           size: 24.0,
-                          semanticLabel:
-                              'Description icon',
+                          semanticLabel: 'Description icon',
                         ),
                       ),
                       Expanded(
@@ -158,14 +155,56 @@ class _AddExpenseState extends State<AddExpense> {
                           },
                         ),
                       ),
+                      Row(
+                        children: [
+                          Text(
+                            "Paid by",
+                            style: TextStyle(fontSize: 10),
+                          ),
+                          SizedBox(width: 3),
+                          Expanded(
+                            child: DropdownButtonFormField(
+                              items: ["Me", "You", "Both"]
+                                  .map((category) => DropdownMenuItem(
+                                        value: category,
+                                        child: Text(category),
+                                      ))
+                                  .toList(),
+                              decoration: InputDecoration(
+                                  // labelText: "Money Paid By",
+                                  ),
+                              onChanged: (String? value) {},
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "Split",
+                            style: TextStyle(fontSize: 10),
+                          ),
+                          SizedBox(width: 3),
+                          Expanded(
+                            child: DropdownButtonFormField(
+                              items: ["Equally", "Manually", "By percentage"]
+                                  .map((category) => DropdownMenuItem(
+                                        value: category,
+                                        child: Text(category),
+                                      ))
+                                  .toList(),
+                              decoration: InputDecoration(
+                                  //  labelText: "Split",
+                                  ),
+                              onChanged: (String? value) {},
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          ] 
-        ),
+        ]),
       ),
     );
   }

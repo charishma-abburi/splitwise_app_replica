@@ -157,6 +157,49 @@ class _AddContributionState extends State<AddContribution> {
                   ],
                 ),
               ),
+              Row(
+              children: [
+                Text(
+                  "Paid by",
+                  style: TextStyle(fontSize: 10),
+                ),
+                SizedBox(width: 3),
+                Expanded(
+                  child: DropdownButtonFormField(
+                    items: ["Me", "You", "Both"]
+                        .map((category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category),
+                            ))
+                        .toList(),
+                    decoration: InputDecoration(
+                     // labelText: "Money Paid By",
+                    ),
+                    onChanged: (String? value) {},
+                  ),
+                ),
+                SizedBox(width: 7),
+                Text(
+                  "Split",
+                  style: TextStyle(fontSize: 10),
+                ),
+                SizedBox(width: 2),
+                Expanded(
+                  child: DropdownButtonFormField(
+                    items: ["Equally", "Manually", "By percentage"]
+                        .map((category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category),
+                            ))
+                        .toList(),
+                    decoration: InputDecoration(
+                    //  labelText: "Split",
+                    ),
+                    onChanged: (String? value) {},
+                  ),
+                ),
+              ],
+            ),
             ],
           ),
         ),

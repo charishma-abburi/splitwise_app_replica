@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/login.dart';
 import 'package:splitwise_app_replica/Screens/Authentication/signup.dart';
-import 'package:splitwise_app_replica/Screens/Expenses/expenses.dart';
+import 'package:splitwise_app_replica/Expenses/expenses.dart';
 import 'package:splitwise_app_replica/Screens/GroupScreens/showAllGroups.dart';
 import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/home.dart';

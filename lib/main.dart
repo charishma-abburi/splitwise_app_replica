@@ -11,7 +11,6 @@
 // import 'package:splitwise_app_replica/services/auth.dart';
 // import 'package:splitwise_app_replica/services/database.dart';
 
-
 // Future main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Firebase.initializeApp();
@@ -134,8 +133,6 @@
 //   }
 // }
 
-
- 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
@@ -145,6 +142,7 @@ import 'package:splitwise_app_replica/src/authenticate/register.dart';
 import 'package:splitwise_app_replica/src/authenticate/signin.dart';
 import 'package:splitwise_app_replica/src/wrapper.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
+import 'package:splitwise_app_replica/Expenses/expenses.dart';
 
 // ...
 
@@ -152,7 +150,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       // options: DefaultFirebaseOptions.currentPlatform,
-  );
+      );
   runApp(const MyApp());
 }
 
@@ -171,6 +169,9 @@ class MyApp extends StatelessWidget {
         home: Wrapper(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteMaker.generateRoute,
+        routes: {
+          '/expense': (context) => NewExpenseScreen(count:0),
+        },
       ),
     );
   }
