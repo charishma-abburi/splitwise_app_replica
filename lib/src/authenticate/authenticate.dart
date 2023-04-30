@@ -20,27 +20,19 @@ class _AuthenticateState extends State<Authenticate> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(32),
+          padding: const EdgeInsets.all(32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
-              FlutterLogo(size: 120),
-              Spacer(),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Hey there,\nWelcome Back!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontFamily: 'aerial',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              const Spacer(),
+              const Image(
+                image: AssetImage("assets/logos/sw.png"),
+                height: 180.0,
               ),
-              SizedBox(height: 8,),
-              Align(
+              // Spacer(),
+
+              const SizedBox(height: 8,),
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Login into your Account to continue!',
@@ -52,66 +44,74 @@ class _AuthenticateState extends State<Authenticate> {
                   ),
                 ),
               ),
-              Spacer(),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 93, 255, 228),
-                  onPrimary: Colors.white,
-                  minimumSize: Size(double.infinity, 50),
-                ),
+              const Spacer(),
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(Register.id);
                 },
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.black,fontSize: 16),
+                style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(76, 187, 155, 1),
+                  minimumSize: const Size(double.maxFinite, 40.0),
+                  elevation: 5.0
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 93, 255, 228),
-                  onPrimary: Colors.white,
-                  minimumSize: Size(double.infinity, 50),
+                child: const Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
                 ),
+
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(SignIn.id);
                 },
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(color: Colors.black, fontSize: 16),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  minimumSize: const Size(double.maxFinite, 40.0),
+                  elevation: 5.0
                 ),
+                child: const Text(
+                  "Sign In",
+                  style: TextStyle(
+                    color: Colors.black
+                  ),
+                ),
+
               ),
-              SizedBox(
+
+              const SizedBox(
                 height: 30,
               ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 93, 255, 228),
-                  onPrimary: Colors.white,
-                  minimumSize: Size(double.infinity, 50),
-                ),
-                icon: FaIcon(FontAwesomeIcons.google, color: Colors.black , size: 24),
+              TextButton.icon(
                 onPressed: () async {
                   dynamic result = await _auth.googleLogIn();
                   await _db.CreateUser(
-                      result.uid, result.email, result.name);
-                  if (result == null) {
-                    print("ERROR!!");
-                  } else {
-                    print("GR* SUCSES");
-                  }
+                  result.uid, result.email, result.name);
                 },
-                label: Text('Sign In with Google',
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    minimumSize: const Size(double.maxFinite, 40.0),
+                    elevation: 5.0
+                ),
+                label: const Text(
+                  "Sign In with Google",
                   style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
+                      color: Colors.black
                   ),
                 ),
+                icon: Image.asset(
+                  "assets/google-logo.png",
+                  height: 24.0,
+                  width: 24.0,
+                )
               ),
-              Spacer(),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           )),
     );

@@ -26,7 +26,7 @@ class _AccountPageState extends State<AccountPage> {
           children: [
             Center(
               child: 
-              Text(username as String, style: TextStyle(fontSize: 24)),
+              Text(username.toString(), style: TextStyle(fontSize: 24)),
             ),
             SizedBox(height: 20),
             Center(

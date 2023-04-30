@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 
 const Map currencySymbols = {
   'rupee': '\u{20B9}',
@@ -8,3 +9,5 @@ const Map currencySymbols = {
   'yen': '\u{00A5}',
   'euro': '\u{20AC}',
 };
+
+const colorTheme = Color.fromRGBO(76, 187, 155, 1);

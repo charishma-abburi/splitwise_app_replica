@@ -1,3 +1,4 @@
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,101 +17,183 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.brown[50],
-      appBar: AppBar(
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: Text('Sign in to split-wise'),
-      ),
-      body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-          child: Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Email',
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20.0,
                     ),
-                    validator: (val) {
-                      if (val == null) {
-                        return "Enter an non null email";
-                      } else {
-                        return val.isEmpty ? "Enter an email" : null;
-                      }
-                    },
-                    onChanged: (val) {
-                      setState(() {
-                        email = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Password',
+                    Row(
+                      children: [
+                        Image.asset(
+                          "assets/logos/sw-wide.png",
+                          height: 50.0,
+                        )
+                      ],
                     ),
-                    validator: (val) {
-                      if (val == null) {
-                        return "Enter a non null password of minimum 6 chars";
-                      } else {
-                        return val.length < 6 ? "Incorrect Password" : null;
-                      }
-                    },
-                    obscureText: true,
-                    onChanged: (val) {
-                      setState(() {
-                        password = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (_formkey.currentState!.validate()) {
-                          dynamic result = await _auth
-                              .signInWithEmailAndPassword(email, password);
-                          if (result == null) {
-                            setState(() {
-                              error = 'Incorrect Email or Password';
-                            });
-                          } else {
-                            Navigator.pop(context);
-                            print(result.uid);
-                            setState(() {
-                              error = '';
-                            });
-                          }
+                    const SizedBox(
+                      height: 60.0,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          labelText: 'Email address',
+                          contentPadding: EdgeInsets.only(
+                              bottom: 0.0
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: colorTheme,
+                                  width: 2.0
+                              )
+                          )
+                      ),
+                      validator: (val) {
+                        if (val == null) {
+                          return "Enter an non null email";
+                        } else {
+                          return val.isEmpty ? "Enter an email" : null;
                         }
                       },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.greenAccent),
+                      onChanged: (val) {
+                        setState(() {
+                          email = val;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'Your Password',
+                          suffixIcon: IconButton(
+                            icon: _obscureText ? const Icon(
+                              Icons.visibility,
+                              color: Colors.grey,
+                            ) : const Icon(
+                              Icons.visibility_off,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
+                          contentPadding: const EdgeInsets.only(
+                              bottom: 0.0
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: colorTheme,
+                                  width: 2.0
+                              )
+                          )
                       ),
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(color: Colors.black),
-                      )),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    error,
-                    style: TextStyle(color: Colors.red, fontSize: 15),
-                  )
-                ],
-              ))),
+                      validator: (val) {
+                        if (val == null) {
+                          return "Enter a non null password of minimum 6 chars";
+                        } else {
+                          return val.length < 6 ? "Incorrect Password" : null;
+                        }
+                      },
+                      onChanged: (val) {
+                        setState(() {
+                          password = val;
+                        });
+                      },
+                      obscureText: _obscureText,
+                    ),
+
+                    Container(
+                      height: 80.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Color.fromRGBO(173, 173, 173, 1),
+                                  width: 1.0
+                              ),
+                              borderRadius: BorderRadius.circular(5.0)
+                          ),
+                          width: 120.0,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text(
+                              "Back",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: const Color.fromRGBO(173, 173, 173, 1),
+                                  width: 1.0
+                              ),
+                              borderRadius: BorderRadius.circular(5.0)
+                          ),
+                          width: 120.0,
+                          height: 50.0,
+                          child: TextButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                dynamic result = await _auth
+                                    .signInWithEmailAndPassword(email, password);
+                                if (result == null) {
+                                  setState(() {
+                                    error = 'Incorrect Email or Password';
+                                  });
+                                } else {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    error = '';
+                                  });
+                                }
+                              }
+                            },
+                            style: TextButton.styleFrom(
+                              backgroundColor: colorTheme,
+
+                            ),
+                            child: const Text(
+                              "Sign in",
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+
+                    ),
+                    Container(
+                      height: 40.0,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        )
     );
+
   }
 }
