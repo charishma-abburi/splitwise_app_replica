@@ -64,6 +64,7 @@ dependencies:
   mailer: ^6.0.1
   flutter_local_notifications: ^14.0.0+1
   firebase_messaging: ^14.4.1
+  google_nav_bar: ^5.0.6
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +99,7 @@ flutter:
     - assets/logos/sw.png
     - assets/google-logo.png
     - assets/logos/sw-wide.png
+    - assets/pf.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
