@@ -186,7 +186,7 @@ class _RegisterState extends State<Register> {
                         ],
                       ),
                       Container(
-                        height: 80.0,
+                        height: 30.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

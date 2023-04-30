@@ -3,7 +3,8 @@ import 'package:splitwise_app_replica/src/groups/groups_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/src/friends/friends.dart';
 import 'package:splitwise_app_replica/src/activity_page.dart';
-import 'package:splitwise_app_replica/src/debt_management.dart';
+// import 'package:splitwise_app_replica/src/debt_management.dart';
+import 'package:splitwise_app_replica/Expenses/expenses.dart';
 
 class MainPage extends StatefulWidget {
   final String uid;
@@ -11,7 +12,7 @@ class MainPage extends StatefulWidget {
   final String title = 's';
   final screens = [
     const GroupsPage(),
-    const ActivityPage(),
+    ExpenseManagementScreen(),
     const FriendsPage(),
     const AccountPage(),
   ];
@@ -24,7 +25,7 @@ class _MainPageState extends State<MainPage> {
   String _title = 'Your Groups';
   final List<Widget> _screens = [
     const GroupsPage(),
-  const ActivityPage(),
+    ExpenseManagementScreen(),
     const FriendsPage(),
     const AccountPage(),
   ];

@@ -169,7 +169,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteMaker.generateRoute,
         routes: {
-          '/expense': (context) => NewExpenseScreen(count:0),
+       //   '/expense': (context) => ExpenseScreen(),
         },
       ),
     );
