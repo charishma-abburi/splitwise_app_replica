@@ -1,3 +1,4 @@
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/src/groups/create_group_addfriends.dart';
@@ -84,7 +85,15 @@ class _GroupsPageState extends State<BuildPage> {
                   TextField(
                     onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
-                        labelText: 'Search', suffixIcon: Icon(Icons.search)),
+                      labelText: 'Search', suffixIcon: Icon(Icons.search),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: colorTheme,
+                          width: 2.0
+                        )
+                      ),
+                      floatingLabelBehavior: FloatingLabelBehavior.never
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -125,12 +134,11 @@ class _GroupsPageState extends State<BuildPage> {
           height: 90,
           child: Card(
             key: ValueKey(group["id"]),
-            elevation: 2,
-            margin: const EdgeInsets.symmetric(vertical: 10),
+            elevation: 0,
+            // margin: const EdgeInsets.symmetric(vertical: 10),
             child: ListTile(
               visualDensity: VisualDensity.comfortable,
-              // increase size of this icon
-              leading: const Icon(Icons.group),
+              leading: ClipRRect(borderRadius: BorderRadius.circular(5.0), child: Image.asset("assets/groupicon.jpg")),
               onTap: () {
                 Navigator.push(
                   context,
@@ -138,7 +146,7 @@ class _GroupsPageState extends State<BuildPage> {
                 );
               },
               title: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   const SizedBox(height: 13),
