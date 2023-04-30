@@ -271,8 +271,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:splitwise_app_replica/Expenses/upiPayment.dart';
 
-class ExpenseManagementScreen extends StatelessWidget {
+
+class ExpenseManagementScreen extends StatefulWidget {
+  @override
+  State<ExpenseManagementScreen> createState() => _ExpenseManagementScreenState();
+}
+
+class _ExpenseManagementScreenState extends State<ExpenseManagementScreen> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
@@ -332,6 +339,11 @@ class ExpenseManagementScreen extends StatelessWidget {
   }
 
   void _settleDebt(DocumentReference debtRef) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => UPIpayment()),
+    );
+   
     debtRef.update({'isPaid': true});
   }
 }

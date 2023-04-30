@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
+// import 'package:paytm/paytm.dart';
+import 'package:upi_india/upi_india.dart';
+import 'package:splitwise_app_replica/Expenses/upiPayment.dart';
 
-class DebtManagementScreen extends StatelessWidget {
+class DebtManagementScreen extends StatefulWidget {
+  @override
+  State<DebtManagementScreen> createState() => _DebtManagementScreenState();
+}
+
+class _DebtManagementScreenState extends State<DebtManagementScreen> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
@@ -61,8 +70,13 @@ class DebtManagementScreen extends StatelessWidget {
   }
 
   void _settleDebt(DocumentReference debtRef) {
-    debtRef.update({'isPaid': true});
-  }
+    
+Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => UPIpayment()),
+    );
+   
+}
 }
 
 class AddDebtScreen extends StatefulWidget {
@@ -124,8 +138,8 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
               child: Text('Add Debt'),
             ),
           ],
-    ),
-  ),
-);
+        ),
+      ),
+    );
   }
 }
