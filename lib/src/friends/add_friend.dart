@@ -81,7 +81,7 @@ class _AddFriendState extends State<AddFriend> {
               // shift 10 unit left
               label: Text('Confirm', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 93, 255, 228),
+                primary: Color.fromARGB(76, 187, 155, 1),
               ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

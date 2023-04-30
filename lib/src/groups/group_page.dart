@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'add_contribution.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 Future<Map<String, dynamic>> getVals(
     Map<String, dynamic> group, String uid) async {
   Map<String, dynamic> vals = {};
   vals['allfriends'] =
       await DatabaseService().getUsersOfAGroup(group['id'] ?? '');
   vals['ts'] = await DatabaseService().getTsOfAGroup(group['id'] ?? '', uid);
+  //vals['token'] = await DatabaseService().getUserToken(group['id'] ?? '', uid);
   return vals;
 }
+
 
 class Group extends StatelessWidget {
   const Group({Key? key, required this.group}) : super(key: key);
@@ -19,7 +21,7 @@ class Group extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: getVals(group, FirebaseAuth.instance.currentUser!.uid ?? ""),
+      future: getVals(group, FirebaseAuth.instance.currentUser!.uid),
       builder: ((BuildContext context,
           AsyncSnapshot<Map<String, dynamic>> snapshot) {
         if (snapshot.connectionState != ConnectionState.waiting) {
@@ -61,6 +63,8 @@ class _GroupState extends State<GroupsBuild> {
   List<Map<String, dynamic>> groupMembers = [];
   final _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> group = <String, dynamic>{};
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
 
   // initial values of the friend as empty map
   @override
@@ -74,6 +78,8 @@ class _GroupState extends State<GroupsBuild> {
     print(mapping.toString());
     group.addAll(widget.group);
     // CONNECTED USERS --------------
+    _firebaseMessaging.requestPermission();
+
     super.initState();
   }
 
@@ -82,6 +88,10 @@ class _GroupState extends State<GroupsBuild> {
   static const textStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
   @override
   Widget build(BuildContext context) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  print('Got a message: ${message.notification?.body}');
+});
+
     return Hero(
       tag: 'group-${group['id']}',
       child: Scaffold(
@@ -110,7 +120,8 @@ class _GroupState extends State<GroupsBuild> {
                                       : SizedBox(
                                           height: 10,
                                         );
-                    }),
+                               
+     }),
               ),
             ],
           ),
@@ -143,6 +154,77 @@ class _GroupState extends State<GroupsBuild> {
   buildHeading2() => const Padding(
       padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
       child: Text('Members and Contributions', style: headingStyle));
+// buildConnectedUser(int index) =>Card(
+   
+// if(mapping['connected_users'][index]['amount'] > 0) {
+//     String token = mapping['connected_users'][index]['token'];
+//     String message =
+//         'You owe ${mapping['connected_users'][index]['friend_name']} ${mapping['connected_users'][index]['amount']}';
+//     _firebaseMessaging.send(
+//         to: token,
+//         notification: Notification(
+//             title: 'Splitwise', body: message),
+//         data: {'message': message});
+//         },
+//         );
+//   // {
+//   // if (mapping['connected_users'][index]['amount'] > 0) {
+//   //   String token = mapping['connected_users'][index]['token'];
+//   //   String message =
+//   //       'You owe ${mapping['connected_users'][index]['friend_name']} ${mapping['connected_users'][index]['amount']}';
+//   //   _firebaseMessaging.send(
+//   //       to: token,
+//   //       notification: Notification(
+//   //           title: 'Splitwise', body: message),
+//   //       data: {'message': message});
+//   // }
+
+//   buildMember(int index) => Card(
+//     key: ValueKey(mapping['connected_users'][index]['name']),
+//     elevation: 2,
+//     child: ListTile(
+//       title: Text(
+//         mapping['connected_users'][index]['friend_name'],
+//         style: textStyle,
+//       ),
+//       trailing: Text(
+//         '${mapping['connected_users'][index]['amount']}',
+//         style: textStyle,
+//       ),
+//     ),
+//   );
+//  buildConnectedUser(int index) async {
+//   if (mapping['connected_users'][index]['amount'] > 0) {
+//     String token = mapping['connected_users'][index]['token'];
+//     String message = 'You owe ${mapping['connected_users'][index]['friend_name']} ${mapping['connected_users'][index]['amount']}';
+//   await   _firebaseMessaging.sendMessage(
+//       to: token,
+//     //title: 'Splitwise', body: message,
+//       data: {'message': message},
+//     );
+//   }
+//   return Card();
+// }
+
+//  buildMember(int index) {
+//   return Card(
+//     key: ValueKey(mapping['connected_users'][index]['name']),
+//     elevation: 2,
+//     child: ListTile(
+//       title: Text(
+//         mapping['connected_users'][index]['friend_name'],
+//         style: textStyle,
+//       ),
+//       trailing: Text(
+//         '${mapping['connected_users'][index]['amount']}',
+//         style: textStyle,
+//       ),
+//     ),
+//   );
+// }
+
+// }
+
 
   buildConnectedUser(int index) => Card(
       key: ValueKey(mapping['connected_users'][index]['name']),
