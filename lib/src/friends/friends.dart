@@ -67,6 +67,8 @@ class _FriendsPageState extends State<FriendsBuild> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
+     
       body: Padding(
         padding: const EdgeInsets.all(10),
         child:
@@ -81,6 +83,7 @@ class _FriendsPageState extends State<FriendsBuild> {
             TextField(
               onChanged: (value) => _runFilter(value),
               decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
                   labelText: 'Search', suffixIcon: Icon(Icons.search)),
             ),
             const SizedBox(
@@ -120,11 +123,12 @@ class _FriendsPageState extends State<FriendsBuild> {
     tag: 'friend-${friend['id']}',
     child: SizedBox(
       height: 90,
+      width: 60,
       child: Card(
         key: ValueKey(friend["id"]),
         elevation: 2,
 
-        margin: const EdgeInsets.symmetric(vertical: 8),
+        margin: const EdgeInsets.symmetric(vertical: 1),
         child: ListTile(
           visualDensity: VisualDensity.comfortable,
           // increase size of this icon

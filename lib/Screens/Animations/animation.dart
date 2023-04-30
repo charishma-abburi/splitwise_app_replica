@@ -62,7 +62,23 @@
 //     );
 //   }
 // }
+// import 'package:flutter/material.dart';
+// import 'package:splitwise_app_replica/models/user.dart';
+// import 'package:splitwise_app_replica/home.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
+import 'package:splitwise_app_replica/home.dart';
+import 'package:splitwise_app_replica/models/user.dart';
+import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
+import 'package:splitwise_app_replica/src/authenticate/register.dart';
+import 'package:splitwise_app_replica/src/authenticate/signin.dart';
+import 'package:splitwise_app_replica/src/wrapper.dart';
+import 'package:splitwise_app_replica/services/auth.dart';
+import 'package:splitwise_app_replica/Expenses/expenses.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 class SplitwiseAppOpenAnimation extends StatefulWidget {
   @override
   _SplitwiseAppOpenAnimationState createState() =>
@@ -85,7 +101,7 @@ class _SplitwiseAppOpenAnimationState extends State<SplitwiseAppOpenAnimation>
 
   void _onAnimationEnd() {
     if (_animation.status == AnimationStatus.completed) {
-      Navigator.pushReplacementNamed(context, '/home'); // Move to home screen
+      Navigator.pushReplacementNamed(context, '/wrapper'); // Move to home screen
     }
   }
 

@@ -106,6 +106,7 @@ class _GroupsPageState extends State<BuildPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         heroTag: 'createGroup',
+        backgroundColor: Color.fromRGBO(76,187,155,1),
         onPressed: () {
           Navigator.push(
             context,

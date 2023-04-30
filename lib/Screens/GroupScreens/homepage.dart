@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NewExpenseScreen(count:0)),
+         //   MaterialPageRoute(builder: (context) => NewExpenseScreen(count:0)),
           );
         },
         icon: const ImageIcon(

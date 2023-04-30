@@ -137,7 +137,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 import 'package:provider/provider.dart';
+import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
+import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/models/user.dart';
+import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
 import 'package:splitwise_app_replica/src/authenticate/register.dart';
 import 'package:splitwise_app_replica/src/authenticate/signin.dart';
 import 'package:splitwise_app_replica/src/wrapper.dart';
@@ -169,12 +172,16 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
-        title: 'Campus Splitwise',
-        home: Wrapper(),
+        title: ' Splitwise Replica',
+        home: SplitwiseAppOpenAnimation(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteMaker.generateRoute,
+        //initialRoute: '/',
         routes: {
        //   '/expense': (context) => ExpenseScreen(),
+      //  '/':(context) => SplitwiseAppOpenAnimation(),
+      //  '/home':(context) => HomeScreen(),
+      '/wrapper':(context)=>Wrapper(),
         },
       ),
     );
