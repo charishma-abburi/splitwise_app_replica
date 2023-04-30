@@ -1,3 +1,5 @@
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/src/account_page.dart';
 import 'package:splitwise_app_replica/src/groups/groups_home_page.dart';
 import 'package:flutter/material.dart';
@@ -37,37 +39,20 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     const bgcolor = Color.fromARGB(255, 93, 255, 228);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_title),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 35, 34, 34),
-          ),
-        ),
-      ),
-      body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        fixedColor: Colors.white,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group, color: bgcolor),
-            label: 'Groups',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: bgcolor),
-            label: 'Activity',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: bgcolor),
-            label: 'Friends',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded, color: bgcolor),
-            label: 'Account',
-          ),
-        ],
-        onTap: (int index) {
+      // appBar: AppBar(
+      //   title: Text(_title),
+      //   flexibleSpace: Container(
+      //     decoration: const BoxDecoration(
+      //       color: Color.fromARGB(255, 35, 34, 34),
+      //     ),
+      //   ),
+      // ),
+      body: SafeArea(child: _screens[_currentIndex]),
+      bottomNavigationBar: GNav(
+        color: Colors.black,
+        // tabBackgroundColor: colorTheme,
+        activeColor: colorTheme,
+        onTabChange: (index) {
           setState(() {
             _currentIndex = index;
             switch (index) {
@@ -94,7 +79,75 @@ class _MainPageState extends State<MainPage> {
             }
           });
         },
+        selectedIndex: _currentIndex,
+        tabs: [
+          GButton(
+            icon: Icons.group,
+            text: "Groups",
+          ),
+          GButton(
+            icon: Icons.show_chart,
+            text: "Activity",
+          ),
+          GButton(
+            icon: Icons.person,
+            text: "Friends",
+          ),
+          GButton(
+            icon: Icons.account_box,
+            text: "Account"
+          ),
+        ],
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _currentIndex,
+      //   fixedColor: Colors.white,
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.group, color: bgcolor),
+      //       label: 'Groups',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home, color: bgcolor),
+      //       label: 'Activity',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person, color: bgcolor),
+      //       label: 'Friends',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.account_circle_rounded, color: bgcolor),
+      //       label: 'Account',
+      //     ),
+      //   ],
+      //   onTap: (int index) {
+      //     setState(() {
+      //       _currentIndex = index;
+      //       switch (index) {
+      //         case 0:
+      //           {
+      //             _title = 'Your Groups';
+      //           }
+      //           break;
+      //         case 1:
+      //           {
+      //             _title = 'Recent Activity';
+      //           }
+      //           break;
+      //         case 2:
+      //           {
+      //             _title = 'Your Friends';
+      //           }
+      //           break;
+      //         case 3:
+      //           {
+      //             _title = 'Your Profile';
+      //           }
+      //           break;
+      //       }
+      //     });
+      //   },
+      // ),
     );
   }
 }

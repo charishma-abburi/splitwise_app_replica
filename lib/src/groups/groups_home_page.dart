@@ -76,8 +76,8 @@ class _GroupsPageState extends State<BuildPage> {
           children: widget.allgroups.isEmpty
               ? [
                   const SizedBox(height: 20),
-                  Center(
-                      child: const Text('Create a group to start',
+                  const Center(
+                      child: Text('Create a group to start',
                           style: TextStyle(fontSize: 24))),
                 ]
               : [
@@ -141,9 +141,9 @@ class _GroupsPageState extends State<BuildPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 13),
-                  Text('${group['name']}', style: TextStyle(fontSize: 20)),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 13),
+                  Text('${group['name']}', style: const TextStyle(fontSize: 20)),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
