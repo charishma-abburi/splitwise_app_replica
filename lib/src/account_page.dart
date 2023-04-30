@@ -26,67 +26,6 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
-        child: Column(
-          children: [
-            Center(
-              child: Text(username.toString(), style: TextStyle(fontSize: 24)),
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: Text('Email: $email', style: TextStyle(fontSize: 24)),
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Set up UPI ID'),
-                        content: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Enter your UPI ID',
-                          ),
-                          onChanged: (value) {
-                            upiID = value;
-                            // Store the entered UPI ID in a local variable or state variable
-                          },
-                        ),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              // Save the entered UPI ID to the Firestore database
-                              await _db.addUPI(uid, upiID);
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Save'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child:
-                    const Text('Set up UPI ID', style: TextStyle(fontSize: 24)),
-              ),
-            ),
-            Center(
-              child: ElevatedButton(
-                onPressed: () async {
-                  await _auth.signOut();
-                },
-                child: const Text('Logout', style: TextStyle(fontSize: 24)),
-=======
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 40, 0.0, 0),
@@ -100,7 +39,6 @@ class _AccountPageState extends State<AccountPage> {
                     Text("Account", style: TextStyle( fontSize: 25.0),),
                   ],
                 ),
->>>>>>> aa5890aa0c6d44a1b8832b508860ef8ea6a63332
               ),
               Column(
                 children: [

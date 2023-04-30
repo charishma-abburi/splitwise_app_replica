@@ -31,12 +31,12 @@ class _AddExpenseState extends State<AddExpense> {
       tag: 'friend-${friend['id']}',
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Add expense'),
+          title: const Text('Add expense'),
           actions: [
             IconButton(
-              icon: Icon(Icons.check),
+              icon: const Icon(Icons.check),
               // shift 10 unit left
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   // const snackBar = SnackBar(
@@ -58,12 +58,12 @@ class _AddExpenseState extends State<AddExpense> {
               
               children:<Widget> [
                 Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.only(left: 10),
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                   child:
                   Row(children: [
-                    Text('Paid by', style: TextStyle( fontSize: 20)),
-                    SizedBox(width: 10),
+                    const Text('Paid by', style: TextStyle( fontSize: 20)),
+                    const SizedBox(width: 10),
                     Container(
                       // make rounded
                       padding: const EdgeInsets.fromLTRB(20,5,20,5),
@@ -75,16 +75,16 @@ class _AddExpenseState extends State<AddExpense> {
                         ),
                       ),
                       child:
-                          Text(friend['name'], style: TextStyle( fontSize: 18,)),
+                          Text(friend['name'], style: const TextStyle( fontSize: 18,)),
                     ),
                   ],)
                 )
                     ,
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   padding: const EdgeInsets.fromLTRB(15, 0, 20, 20),
                   child:
-                    Text('and split equally', style: TextStyle( fontSize: 18)),
+                    const Text('and split equally', style: TextStyle( fontSize: 18)),
                 ),
               ]
             ),
