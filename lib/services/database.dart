@@ -62,11 +62,24 @@ class DatabaseService {
     db.collection('users').doc(uid).set({
       'email': email,
       'name': name,
+      'upi': "",
     });
     FirebaseAuth.instance.currentUser?.updateDisplayName(name);
     db.collection('userEmail').doc(email).set({'uid': uid});
     db.collection('userFriendsData').doc(uid).set({});
     db.collection('user_grp').doc(uid).set({});
+  }
+
+  Future addUPI(String uid, String upiID) async {
+    final q = await db.collection('users').doc(uid).get();
+    String userName = q.data()?['name'];
+    String email = q.data()?['email'];
+    db.collection('users').doc(uid).set({
+      'email': email,
+      'name': userName,
+      'upi': upiID,
+      
+    });
   }
 
   Future addFriend(String email) async {
