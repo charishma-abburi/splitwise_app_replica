@@ -9,6 +9,7 @@ class DatabaseService {
   final CollectionReference userEmail =
       FirebaseFirestore.instance.collection('userEmail');
   //  data is of the form amount: int, desc string?, paid_by: string
+ 
   Future addActivity(
       String paidBy, int amount, String? desc, String gid) async {
     db.collection('groups').doc(gid).collection('activity').add({
@@ -174,6 +175,24 @@ class DatabaseService {
     };
     return mapping;
   }
+Future<Map<String, dynamic>> getVals(
+    Map<String, dynamic> group, String uid) async {
+  Map<String, dynamic> vals = {};
+  vals['allfriends'] =
+      await DatabaseService().getUsersOfAGroup(group['id'] ?? '');
+  vals['ts'] = await DatabaseService().getTsOfAGroup(group['id'] ?? '', uid);
+
+  // Get the list of users with negative balances
+  List<Map<String, dynamic>> negativeBalances = [];
+  for (var member in vals['allfriends']) {
+    if (member['contribution'] < 0) {
+      negativeBalances.add(member);
+    }
+  }
+  vals['negativeBalances'] = negativeBalances;
+
+  return vals;
+}
 
   Future<void> addExpense(String uid, String friendId, String friendName,
       int friendIOU, String description, int amount) async {

@@ -143,14 +143,19 @@ import 'package:splitwise_app_replica/src/authenticate/signin.dart';
 import 'package:splitwise_app_replica/src/wrapper.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
 import 'package:splitwise_app_replica/Expenses/expenses.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 // ...
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       // options: DefaultFirebaseOptions.currentPlatform,
       );
+       FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
