@@ -167,7 +167,6 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         title: 'Campus Splitwise',
-        theme: ThemeData(brightness: Brightness.dark),
         home: Wrapper(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteMaker.generateRoute,
