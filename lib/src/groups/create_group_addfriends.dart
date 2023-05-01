@@ -173,7 +173,7 @@ class _AddGroupPage extends State<BuildPage> {
               leading: ClipRRect(child: Image.asset("assets/pf.png"), borderRadius: BorderRadius.circular(25.0),),
               title: Text(friend['name'],
                   style:
-                      const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                      const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: colorTheme),),
               onTap: () {
 
                 setState(() => val[friend['id']] = !val[friend['id']]);
