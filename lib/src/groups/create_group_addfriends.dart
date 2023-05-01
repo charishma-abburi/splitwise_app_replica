@@ -1,3 +1,4 @@
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/src/groups/create_group_confirm.dart';
@@ -98,11 +99,21 @@ class _AddGroupPage extends State<BuildPage> {
                   child: TextFormField(
                     onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
-                        labelText: 'Search friends',
-                        suffixIcon: Icon(Icons.search)),
+                      labelText: 'Search',
+                      suffixIcon: Icon(Icons.search, color: colorTheme,),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 2.0,
+                          color: colorTheme
+                        ),
+                      )
+                    ),
+
                     validator: (value) {
-                      if (group_users.isEmpty)
-                        return "Please add at least 1 user";
+                      if (group_users.isEmpty) {
+                        return "Add at least 1 user";
+                      }
                       return null;
                     },
                   ),
@@ -149,30 +160,31 @@ class _AddGroupPage extends State<BuildPage> {
 
   Widget buildBox(Map<String, dynamic> friend) => Padding(
         padding: const EdgeInsets.fromLTRB(4, 1, 4, 1),
-        child: Card(
-          key: ValueKey(friend['id']),
-          elevation: 2,
-          color: val[friend['id']] ? Color.fromRGBO(76, 187, 155, 1) : null,
-          child: ListTile(
-            visualDensity: VisualDensity.comfortable,
-            // increase size of this icon
-            contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-            leading: const Icon(Icons.person),
-            title: Text(friend['name'],
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            onTap: () {
-              print(friend);
-              print(val);
-              setState(() => val[friend['id']] = !val[friend['id']]);
-              print(friend);
-              print(val);
-              if (val[friend['id']])
-                group_users[friend['id']] = friend['name'];
-              else
-                group_users.remove(friend['id']);
-              print(group_users);
-            },
+        child: Container(
+          alignment: Alignment.center,
+          child: Card(
+            elevation: 0,
+
+            key: ValueKey(friend['id']),
+            color: val[friend['id']] ? Color.fromRGBO(76, 187, 155, 1) : null,
+            child: ListTile(
+              visualDensity: VisualDensity.comfortable,
+              contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+              leading: ClipRRect(child: Image.asset("assets/pf.png"), borderRadius: BorderRadius.circular(25.0),),
+              title: Text(friend['name'],
+                  style:
+                      const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+              onTap: () {
+
+                setState(() => val[friend['id']] = !val[friend['id']]);
+
+                if (val[friend['id']]) {
+                  group_users[friend['id']] = friend['name'];
+                } else {
+                  group_users.remove(friend['id']);
+                }
+              },
+            ),
           ),
         ),
       );

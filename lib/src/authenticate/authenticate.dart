@@ -22,103 +22,101 @@ class _AuthenticateState extends State<Authenticate> {
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.all(32),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                const Image(
-                  image: AssetImage("assets/logos/sw.png"),
-                  height: 180.0,
-                ),
-                // Spacer(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              const Image(
+                image: AssetImage("assets/logos/sw.png"),
+                height: 180.0,
+              ),
+              // Spacer(),
 
-                const SizedBox(height: 8,),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Login into your Account to continue!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'aerial',
+              const SizedBox(height: 8,),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Login into your Account to continue!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'aerial',
 
-                    ),
                   ),
                 ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(Register.id);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(76, 187, 155, 1),
-                    minimumSize: const Size(double.maxFinite, 40.0),
-                    elevation: 5.0,
-                    foregroundColor: Colors.white
+              ),
+              const Spacer(),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(Register.id);
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(76, 187, 155, 1),
+                  minimumSize: const Size(double.maxFinite, 40.0),
+                  elevation: 5.0,
+                  foregroundColor: Colors.white
+                ),
+                child: const Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: Colors.white
                   ),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: Colors.white
-                    ),
-                  ),
+                ),
 
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(SignIn.id);
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  minimumSize: const Size(double.maxFinite, 40.0),
+                  elevation: 5.0,
+                  foregroundColor: colorTheme
                 ),
-                const SizedBox(
-                  height: 30,
+                child: const Text(
+                  "Sign In",
+                  style: TextStyle(
+                    color: Colors.black
+                  ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(SignIn.id);
-                  },
-                  style: TextButton.styleFrom(
+
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+              TextButton.icon(
+                onPressed: () async {
+                  dynamic result = await _auth.googleLogIn();
+                  await _db.CreateUser(
+                  result.uid, result.email, result.name);
+                },
+                style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
                     minimumSize: const Size(double.maxFinite, 40.0),
                     elevation: 5.0,
                     foregroundColor: colorTheme
-                  ),
-                  child: const Text(
-                    "Sign In",
-                    style: TextStyle(
+                ),
+                label: const Text(
+                  "Sign In with Google",
+                  style: TextStyle(
                       color: Colors.black
-                    ),
                   ),
-
                 ),
-
-                const SizedBox(
-                  height: 30,
-                ),
-                TextButton.icon(
-                  onPressed: () async {
-                    dynamic result = await _auth.googleLogIn();
-                    await _db.CreateUser(
-                    result.uid, result.email, result.name);
-                  },
-                  style: TextButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      minimumSize: const Size(double.maxFinite, 40.0),
-                      elevation: 5.0,
-                      foregroundColor: colorTheme
-                  ),
-                  label: const Text(
-                    "Sign In with Google",
-                    style: TextStyle(
-                        color: Colors.black
-                    ),
-                  ),
-                  icon: Image.asset(
-                    "assets/google-logo.png",
-                    height: 24.0,
-                    width: 24.0,
-                  )
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-              ],
-            ),
+                icon: Image.asset(
+                  "assets/google-logo.png",
+                  height: 24.0,
+                  width: 24.0,
+                )
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
           )),
     );
   }

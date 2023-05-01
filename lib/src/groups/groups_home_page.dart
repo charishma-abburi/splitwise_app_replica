@@ -86,13 +86,14 @@ class _GroupsPageState extends State<BuildPage> {
                     onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
                       labelText: 'Search', suffixIcon: Icon(Icons.search),
-                      focusedBorder: UnderlineInputBorder(
+                        focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: colorTheme,
                           width: 2.0
                         )
                       ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      focusColor: colorTheme
                     ),
                   ),
                   const SizedBox(
