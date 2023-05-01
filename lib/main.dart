@@ -176,11 +176,9 @@ class MyApp extends StatelessWidget {
         home: SplitwiseAppOpenAnimation(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteMaker.generateRoute,
-        //initialRoute: '/',
+      
         routes: {
-       //   '/expense': (context) => ExpenseScreen(),
-      //  '/':(context) => SplitwiseAppOpenAnimation(),
-      //  '/home':(context) => HomeScreen(),
+      
       '/wrapper':(context)=>Wrapper(),
         },
       ),

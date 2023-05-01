@@ -228,8 +228,8 @@ class _GroupState extends State<GroupsBuild> {
 
   buildConnectedUser(int index) => Card(
       key: ValueKey(mapping['connected_users'][index]['name']),
-      elevation: 2,
       child: ListTile(
+        leading: Image.asset("assets/expenseIcon3.png", height: 50.0,),
         title: Text(
           mapping['connected_users'][index]['friend_name'],
           style: textStyle,
@@ -241,8 +241,8 @@ class _GroupState extends State<GroupsBuild> {
       ));
   buildMember(int index) => Card(
         key: ValueKey(groupMembers[index]['uid']),
-        elevation: 2,
         child: ListTile(
+          leading: ClipRRect(borderRadius: BorderRadius.circular(25.0), child: Image.asset("assets/pf.png", height: 50.0, fit: BoxFit.fill,)),
           title: Text(
             groupMembers[index]['name'],
             style: textStyle,

@@ -17,7 +17,7 @@ class _DebtManagementScreenState extends State<DebtManagementScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Debt Management'),
+        title: const Text('Debt Management'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: firestore.collection('debts').snapshots(),
@@ -27,7 +27,7 @@ class _DebtManagementScreenState extends State<DebtManagementScreen> {
           }
 
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           final debts = snapshot.data!.docs;
@@ -43,12 +43,12 @@ class _DebtManagementScreenState extends State<DebtManagementScreen> {
 
               return ListTile(
                 title: Text('$debtor owes $creditor $amount'),
-                subtitle: isPaid ? Text('Paid') : Text('Not Paid'),
+                subtitle: isPaid ? const Text('Paid') : const Text('Not Paid'),
                 trailing: isPaid
                     ? null
                     : ElevatedButton(
                         onPressed: () => _settleDebt(debt.reference),
-                        child: Text('Settle'),
+                        child: const Text('Settle'),
                       ),
               );
             },
@@ -57,7 +57,7 @@ class _DebtManagementScreenState extends State<DebtManagementScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addDebt(context),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -110,7 +110,7 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Debt'),
+        title: const Text('Add Debt'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -119,23 +119,23 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
           children: [
             TextField(
               controller: _debtorController,
-              decoration: InputDecoration(hintText: 'Debtor'),
+              decoration: const InputDecoration(hintText: 'Debtor'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _creditorController,
-              decoration: InputDecoration(hintText: 'Creditor'),
+              decoration: const InputDecoration(hintText: 'Creditor'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Amount'),
+              decoration: const InputDecoration(hintText: 'Amount'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _addDebt,
-              child: Text('Add Debt'),
+              child: const Text('Add Debt'),
             ),
           ],
         ),

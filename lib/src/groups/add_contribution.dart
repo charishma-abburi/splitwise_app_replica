@@ -28,12 +28,12 @@ class _AddContributionState extends State<AddContribution> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Contribution'),
+        title: const Text('Add Contribution'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             // shift 10 unit left
-            padding: EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 10),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 // If the form is valid, display a snackbar. In the real world,
@@ -53,12 +53,12 @@ class _AddContributionState extends State<AddContribution> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.only(left: 10),
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                   child: Row(
                     children: [
-                      Text('Group : ', style: TextStyle(fontSize: 20)),
-                      SizedBox(width: 10),
+                      const Text('Group : ', style: TextStyle(fontSize: 20)),
+                      const SizedBox(width: 10),
                       Container(
                         // make rounded
                         padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
@@ -70,7 +70,7 @@ class _AddContributionState extends State<AddContribution> {
                           ),
                         ),
                         child: Text(group['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             )),
                       ),
@@ -159,11 +159,11 @@ class _AddContributionState extends State<AddContribution> {
               ),
               Row(
               children: [
-                Text(
+                const Text(
                   "Paid by",
                   style: TextStyle(fontSize: 10),
                 ),
-                SizedBox(width: 3),
+                const SizedBox(width: 3),
                 Expanded(
                   child: DropdownButtonFormField(
                     items: ["Me", "You", "Both"]
@@ -172,18 +172,18 @@ class _AddContributionState extends State<AddContribution> {
                               child: Text(category),
                             ))
                         .toList(),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                      // labelText: "Money Paid By",
                     ),
                     onChanged: (String? value) {},
                   ),
                 ),
-                SizedBox(width: 7),
-                Text(
+                const SizedBox(width: 7),
+                const Text(
                   "Split",
                   style: TextStyle(fontSize: 10),
                 ),
-                SizedBox(width: 2),
+                const SizedBox(width: 2),
                 Expanded(
                   child: DropdownButtonFormField(
                     items: ["Equally", "Manually", "By percentage"]
@@ -192,7 +192,7 @@ class _AddContributionState extends State<AddContribution> {
                               child: Text(category),
                             ))
                         .toList(),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                     //  labelText: "Split",
                     ),
                     onChanged: (String? value) {},

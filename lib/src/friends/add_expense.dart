@@ -74,9 +74,9 @@ class _AddExpenseState extends State<AddExpense> {
           backgroundColor: Color.fromRGBO(76, 187, 155, 1),
           actions: [
             IconButton(
-              icon: Icon(Icons.check),
+              icon: const Icon(Icons.check),
               // shift 10 unit left
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   // const snackBar = SnackBar(
@@ -133,7 +133,7 @@ class _AddExpenseState extends State<AddExpense> {
                       ],
                     )),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   padding: const EdgeInsets.fromLTRB(15, 0, 20, 20),
                   child:
                       Text('and split equally', style: TextStyle(fontSize: 18)),
