@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:upi_india/upi_india.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UPIpayment extends StatefulWidget {
+  const UPIpayment({Key? key, required this.friend, required this.amount,required this.onPaymentCompleted})
+      : super(key: key);
+  final Map<String, dynamic> friend;
+  final int amount;
+   final Function(bool) onPaymentCompleted;
   @override
   _UPIpaymentState createState() => _UPIpaymentState();
 }
 
 class _UPIpaymentState extends State<UPIpayment> {
+  String upiID = '';
+  int amount = 0;
+  final Map<String, dynamic> friend = <String, dynamic>{};
+
   Future<UpiResponse>? _transaction;
   UpiIndia _upiIndia = UpiIndia();
   List<UpiApp>? apps;
@@ -21,6 +30,20 @@ class _UPIpaymentState extends State<UPIpayment> {
     fontWeight: FontWeight.w400,
     fontSize: 14,
   );
+  @override
+  Future<String> getUPIId(String uid) async {
+    final userDocRef = FirebaseFirestore.instance.collection('users').doc(uid);
+    final userDocSnapshot = await userDocRef.get();
+    if (userDocSnapshot.exists) {
+      final userData = userDocSnapshot.data();
+      if (userData != null && userData.containsKey('upi')) {
+        upiID = userData['upi'];
+        print(upiID);
+        return userData['upi'];
+      }
+    }
+    return ""; // User document not found or missing 'upiid' field
+  }
 
   @override
   void initState() {
@@ -32,16 +55,23 @@ class _UPIpaymentState extends State<UPIpayment> {
       apps = [];
     });
     super.initState();
+    friend.addAll(widget.friend);
+
+    final q1 = getUPIId(friend['id']);
+    upiID = q1.toString();
+    print(upiID);
+    amount = widget.amount;
+    print(amount);
   }
 
   Future<UpiResponse> initiateTransaction(UpiApp app) async {
     return _upiIndia.startTransaction(
       app: app,
-      receiverUpiId: "srija.gandrathi@ybl",
-      receiverName: 'Srija',
+      receiverUpiId: upiID,
+      receiverName: friend['name'],
       transactionRefId: 'TestingUpiIndiaPlugin',
-      transactionNote: 'Not actual. Just an example.',
-      amount: 100.00,
+      transactionNote: 'Re-directed Transaction by splitwise-app',
+      amount: amount.toDouble(),
     );
   }
 
@@ -109,12 +139,18 @@ class _UPIpaymentState extends State<UPIpayment> {
     switch (status) {
       case UpiPaymentStatus.SUCCESS:
         print('Transaction Successful');
+        widget.onPaymentCompleted(true);
+        Navigator.pop(context, true);
+
         break;
       case UpiPaymentStatus.SUBMITTED:
         print('Transaction Submitted');
+        Navigator.pop(context, true);
         break;
       case UpiPaymentStatus.FAILURE:
         print('Transaction Failed');
+        widget.onPaymentCompleted(false);
+        Navigator.pop(context, false);
         break;
       default:
         print('Received an Unknown transaction status');
@@ -152,7 +188,8 @@ class _UPIpaymentState extends State<UPIpayment> {
           Expanded(
             child: FutureBuilder(
               future: _transaction,
-              builder: (BuildContext context, AsyncSnapshot<UpiResponse> snapshot) {
+              builder:
+                  (BuildContext context, AsyncSnapshot<UpiResponse> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(

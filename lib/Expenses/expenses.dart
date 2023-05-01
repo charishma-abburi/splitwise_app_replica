@@ -1,277 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-
-// class NewExpenseScreen extends StatelessWidget {
-//   int count = 0;
-//   final _descController = TextEditingController();
-//   final _amtController = TextEditingController();
-//   NewExpenseScreen({super.key, required this.count});
-//   @override
-//   void dispose() {
-//     _descController.dispose();
-//     _amtController.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           "New Expense",
-//           style: TextStyle(
-//             color: Colors.black,
-//           ),
-//         ),
-//         backgroundColor: Colors.white,
-//         leading: IconButton(
-//           icon: Icon(Icons.arrow_back),
-//           color: Colors.black,
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//         ),
-//       ),
-//       body: Padding(
-//         padding: EdgeInsets.all(16),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Row(
-//               children: [
-//                 Icon(Icons.description),
-//                 SizedBox(width: 15),
-//                 Expanded(
-//                   child: TextFormField(
-//                     controller: _descController,
-//                     decoration: InputDecoration(
-//                       labelText: "Description",
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             SizedBox(height: 15),
-//             Row(
-//               children: [
-//                 Icon(Icons.attach_money),
-//                 SizedBox(width: 15),
-//                 Expanded(
-//                   child: TextFormField(
-//                     controller: _amtController,
-//                     decoration: InputDecoration(
-//                       labelText: "Amount",
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             SizedBox(height: 10),
-//             // Row(
-//             //   children: [
-//             //     Text(
-//             //       "Paid by",
-//             //       style: TextStyle(fontSize: 10),
-//             //     ),
-//             //     SizedBox(width: 3),
-//             //     Expanded(
-//             //       child: DropdownButtonFormField(
-//             //         items: ["Me", "You", "Both"]
-//             //             .map((category) => DropdownMenuItem(
-//             //                   value: category,
-//             //                   child: Text(category),
-//             //                 ))
-//             //             .toList(),
-//             //         decoration: InputDecoration(
-//             //          // labelText: "Money Paid By",
-//             //         ),
-//             //         onChanged: (String? value) {},
-//             //       ),
-//             //     ),
-//             //     SizedBox(width: 10),
-//             //     Text(
-//             //       "Split",
-//             //       style: TextStyle(fontSize: 10),
-//             //     ),
-//             //     SizedBox(width: 3),
-//             //     Expanded(
-//             //       child: DropdownButtonFormField(
-//             //         items: ["Equally", "Manually", "By percentage"]
-//             //             .map((category) => DropdownMenuItem(
-//             //                   value: category,
-//             //                   child: Text(category),
-//             //                 ))
-//             //             .toList(),
-//             //         decoration: InputDecoration(
-//             //         //  labelText: "Split",
-//             //         ),
-//             //         onChanged: (String? value) {},
-//             //       ),
-//             //     ),
-//             //   ],
-//             // ),
-//             SizedBox(height: 16),
-//             ElevatedButton(
-//                 onPressed: () async {
-//                   print(count);
-//                   Navigator.pop(context, {
-//                     'count': count + 1,
-//                     'desc': _descController.text.trim(),
-//                     'amount': _amtController.text.trim()
-//                   });
-//                 },
-//                 child: Text("Add Expense"),
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Colors.green,
-//                 )),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-
-// class ExpenseScreen extends StatelessWidget {
-//   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Expense Management'),
-//       ),
-//       body: StreamBuilder<QuerySnapshot>(
-//         stream: firestore.collection('expenses').snapshots(),
-//         builder: (context, snapshot) {
-//           if (snapshot.hasError) {
-//             return Center(child: Text('Error: ${snapshot.error}'));
-//           }
-
-//           if (!snapshot.hasData) {
-//             return Center(child: CircularProgressIndicator());
-//           }
-
-//           final debts = snapshot.data!.docs;
-
-//           return ListView.builder(
-//             itemCount: debts.length,
-//             itemBuilder: (context, index) {
-//               final debt = debts[index];
-//               final desc = debt['desc'];
-//               final date = debt['date'];
-//               final amount = debt['amount'];
-//               final isPaid = debt['isPaid'];
-
-//               return ListTile(
-//                 title: Text('$desc You have added expense owes $date $amount'),
-//                 subtitle: isPaid ? Text('Paid') : Text('Not Paid'),
-//                 trailing: isPaid
-//                     ? null
-//                     : ElevatedButton(
-//                         onPressed: () => _settleDebt(debt.reference),
-//                         child: Text('Settle'),
-//                       ),
-//               );
-//             },
-//           );
-//         },
-//       ),
-//       floatingActionButton: FloatingActionButton.extended(
-//         onPressed: () => _addExpense(context),
-//        // child: Icon(Icons.add),
-//          icon: const ImageIcon(
-//           AssetImage("assets/expenseIcon2.jpg"),
-//         ),
-//         label: const Text("Add Expense"),
-//         backgroundColor:  const Color.fromRGBO(76, 187, 155, 1),
-//       ),
-//         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-//     );
-//   }
-
-//   void _addExpense(BuildContext context) {
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(builder: (context) => AddExpenseScreen()),
-//     );
-//   }
-
-//   void _settleDebt(DocumentReference debtRef) {
-//     debtRef.update({'isPaid': true});
-//   }
-// }
-
-// class AddExpenseScreen extends StatefulWidget {
-//   @override
-//   _AddExpenseScreenState createState() => _AddExpenseScreenState();
-// }
-
-// class _AddExpenseScreenState extends State<AddExpenseScreen> {
-//   final TextEditingController _descController = TextEditingController();
-//   final TextEditingController _dateController = TextEditingController();
-//   final TextEditingController _amountController = TextEditingController();
-
-//   void _addExpense() {
-//     final desc = _descController.text;
-//     final date = _dateController.text;
-//     final amount = double.tryParse(_amountController.text) ?? 0.0;
-
-//     if (desc.isNotEmpty && date.isNotEmpty && amount > 0) {
-//       FirebaseFirestore.instance.collection('debts').add({
-//         'desc': desc,
-//         'date': date,
-//         'amount': amount,
-//         'isPaid': false,
-//       });
-
-//       Navigator.pop(context);
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Add Expense'),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.stretch,
-//           children: [
-//             TextField(
-//               controller: _descController,
-//               decoration: InputDecoration(hintText: 'desc'),
-//             ),
-//             SizedBox(height: 8),
-//             TextField(
-//               controller: _dateController,
-//               decoration: InputDecoration(hintText: 'date'),
-//             ),
-//             SizedBox(height: 8),
-//             TextField(
-//               controller: _amountController,
-//               keyboardType: TextInputType.number,
-//               decoration: InputDecoration(hintText: 'Amount'),
-//             ),
-//             SizedBox(height: 16),
-//             ElevatedButton(
-//               onPressed: _addExpense,
-//               child: Text('Add Debt'),
-//             ),
-//           ],
-//     ),
-//   ),
-// );
-//   }
-// }
 
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:splitwise_app_replica/Expenses/upiPayment.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:splitwise_app_replica/services/auth.dart';
 
 
 class ExpenseManagementScreen extends StatefulWidget {
@@ -281,15 +14,17 @@ class ExpenseManagementScreen extends StatefulWidget {
 
 class _ExpenseManagementScreenState extends State<ExpenseManagementScreen> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
+  final AuthService _auth = AuthService();
+  String uid = FirebaseAuth.instance.currentUser?.uid ?? '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Expense Management'),
+        backgroundColor: Color.fromRGBO(76, 187, 155, 1),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: firestore.collection('expenses').snapshots(),
+        stream: firestore.collection('expenses').doc(uid).collection('expense').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -311,23 +46,37 @@ class _ExpenseManagementScreenState extends State<ExpenseManagementScreen> {
               final isPaid = debt['isPaid'];
 
               return ListTile(
-                title: Text('$desc owes $date $amount'),
+                title: Text('You added an expense for "$desc" on [$date] : Rs. $amount'),
                 subtitle: isPaid ? Text('Paid') : Text('Not Paid'),
                 trailing: isPaid
                     ? null
                     : ElevatedButton(
+                       style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Color.fromRGBO(76, 187, 155, 1),
+                                    ),
+                                  ),
                         onPressed: () => _settleDebt(debt.reference),
-                        child: Text('Settle'),
+                        child: Text('Already Paid?',
+                      //  style: TextStyle(color: Color.fromARGB(76, 187, 155, 1)),
+                        ),
                       ),
               );
             },
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
+     floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _addDebt(context),
-        child: Icon(Icons.add),
+       // child: Icon(Icons.add),
+         icon: const ImageIcon(
+          AssetImage("assets/expenseIcon2.jpg"),
+        ),
+        label: const Text("Add Expense"),
+        backgroundColor:  const Color.fromRGBO(76, 187, 155, 1),
       ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
@@ -339,10 +88,10 @@ class _ExpenseManagementScreenState extends State<ExpenseManagementScreen> {
   }
 
   void _settleDebt(DocumentReference debtRef) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => UPIpayment()),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => UPIpayment()),
+    // );
    
     debtRef.update({'isPaid': true});
   }
@@ -357,6 +106,7 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
   final TextEditingController _descController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  String uid = FirebaseAuth.instance.currentUser?.uid ?? '';
 
   void _addDebt() {
     final desc = _descController.text;
@@ -364,7 +114,7 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
     final amount = double.tryParse(_amountController.text) ?? 0.0;
 
     if (desc.isNotEmpty && date.isNotEmpty && amount > 0) {
-      FirebaseFirestore.instance.collection('expenses').add({
+      FirebaseFirestore.instance.collection('expenses').doc(uid).collection('expense').add({
         'desc': desc,
         'date': date,
         'amount': amount,
@@ -379,7 +129,9 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Debt'),
+        title: Text('Add an Expense'),
+                backgroundColor: Color.fromRGBO(76, 187, 155, 1),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -388,23 +140,33 @@ class _AddDebtScreenState extends State<AddDebtScreen> {
           children: [
             TextField(
               controller: _descController,
-              decoration: InputDecoration(hintText: 'Debtor'),
+              decoration: InputDecoration(hintText: 'Description'),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 15),
             TextField(
               controller: _dateController,
-              decoration: InputDecoration(hintText: 'Creditor'),
+              decoration: InputDecoration(hintText: 'Date (dd-mm-yyyy)'),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 15),
             TextField(
               controller: _amountController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(hintText: 'Amount'),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 30),
             ElevatedButton(
+              
+                      style: ButtonStyle(
+                        minimumSize:  MaterialStateProperty.all<Size>(
+                                    Size(50,50),
+                                    ),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Color.fromRGBO(76, 187, 155, 1),
+                                    ),
+                                  ),
               onPressed: _addDebt,
-              child: Text('Add Debt'),
+              child: Text('Add Expense'),
             ),
           ],
     ),
