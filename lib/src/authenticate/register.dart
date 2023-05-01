@@ -1,3 +1,5 @@
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:splitwise_app_replica/Screens/Animations/spinners.dart';
 import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/database.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +22,12 @@ class _RegisterState extends State<Register> {
   String error = '';
   String name = '';
   String phone = '';
+  bool animation = false;
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+      return animation ? const Spinner() : Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
               child: Form(
@@ -200,12 +203,18 @@ class _RegisterState extends State<Register> {
                             child: TextButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
+                                  setState(() {
+                                    animation = true;
+                                  });
                                   dynamic result = await _auth
                                       .registerWithEmailAndPassword(email, password);
+
                                   if (result == null) {
                                     setState(() {
                                       error = 'Enter a valid email';
+                                      animation = false;
                                     });
+                                    Fluttertoast.showToast(msg: error);
                                   } else {
                                     Navigator.pop(context);
                                     await _db.CreateUser(

@@ -1,3 +1,5 @@
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:splitwise_app_replica/Screens/Animations/spinners.dart';
 import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,10 @@ class _SignInState extends State<SignIn> {
   String error = '';
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
+  bool animation = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return animation ? const Spinner() : Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
             child: Form(
@@ -160,12 +163,18 @@ class _SignInState extends State<SignIn> {
 
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  animation = true;
+                                });
                                 dynamic result = await _auth
                                     .signInWithEmailAndPassword(email, password);
+
                                 if (result == null) {
                                   setState(() {
                                     error = 'Incorrect Email or Password';
+                                    animation = false;
                                   });
+                                  Fluttertoast.showToast(msg: error);
                                 } else {
                                   Navigator.pop(context);
                                   setState(() {

@@ -1,3 +1,4 @@
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:splitwise_app_replica/src/friends/add_expense.dart';
@@ -86,9 +87,18 @@ class _FriendsPageState extends State<FriendsBuild> {
                   TextField(
                     onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Search',
-                        suffixIcon: Icon(Icons.search)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: colorTheme,
+                              width: 2.0
+                          )
+                      ),
+                      labelText: 'Search',
+                      suffixIcon: Icon(Icons.search),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      suffixIconColor: colorTheme,
+                      iconColor: Colors.grey
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -102,7 +112,7 @@ class _FriendsPageState extends State<FriendsBuild> {
                           )
                         : const Text(
                             'No results found',
-                            style: TextStyle(fontSize: 24),
+                            style: TextStyle(fontSize: 20),
                           ),
                   ),
                 ],
@@ -126,20 +136,34 @@ class _FriendsPageState extends State<FriendsBuild> {
 
   Widget buildBox(Map<String, dynamic> friend) => Hero(
         tag: 'friend-${friend['id']}',
-        child: SizedBox(
-          height: 90,
+        child: Container(
+          height: 85,
           width: 60,
+          // alignment: Alignment.center,
           child: Card(
             key: ValueKey(friend["id"]),
-            elevation: 2,
+            elevation: 0,
             margin: const EdgeInsets.symmetric(vertical: 1),
             child: ListTile(
               visualDensity: VisualDensity.comfortable,
               // increase size of this icon
-              leading: const Icon(Icons.person),
-              title: Text(friend['name'],
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(25.0),
+                child: Image.asset(
+                  "assets/pf.png"
+                ),
+              ),
+              title: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  friend['name'],
                   style: const TextStyle(
-                      fontSize: 19, fontWeight: FontWeight.w500)),
+                    fontSize: 19,
+                    color: colorTheme
+                    // fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -183,7 +207,7 @@ class _FriendsPageState extends State<FriendsBuild> {
                               ? Colors.greenAccent
                               : const Color.fromARGB(255, 255, 107, 97),
                     ),
-                  ),    
+                  ),
                       // ElevatedButton(
                       //   style: ButtonStyle(
                       //     minimumSize:  MaterialStateProperty.all<Size>(
@@ -215,7 +239,7 @@ class _FriendsPageState extends State<FriendsBuild> {
                       //         TextStyle(color: Color.fromARGB(76, 187, 155, 1)),
                       //   ),
                       // ),
-                    
+
                 ],
               ),
             ),

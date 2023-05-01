@@ -82,12 +82,11 @@ class _MainPageState extends State<MainPage> {
           });
         },
         selectedIndex: _currentIndex,
-        tabs: [
+        tabs: const [
           GButton(
             icon: Icons.group,
             text: "Groups",
-          ),
-          GButton(
+          ),GButton(
             icon: Icons.person,
             text: "Friends",
           ),
