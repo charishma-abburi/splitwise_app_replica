@@ -133,6 +133,7 @@
 //   }
 // }
 
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
@@ -141,6 +142,7 @@ import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
 import 'package:splitwise_app_replica/home.dart';
 import 'package:splitwise_app_replica/models/user.dart';
 import 'package:splitwise_app_replica/Screens/Animations/animation.dart';
+import 'package:splitwise_app_replica/src/authenticate/forgotpass.dart';
 import 'package:splitwise_app_replica/src/authenticate/register.dart';
 import 'package:splitwise_app_replica/src/authenticate/signin.dart';
 import 'package:splitwise_app_replica/src/wrapper.dart';
@@ -194,6 +196,8 @@ class RouteMaker {
         return MaterialPageRoute(builder: (context) => Register());
       case SignIn.id:
         return MaterialPageRoute(builder: (context) => SignIn());
+      case ForgotPassword.id:
+        return MaterialPageRoute(builder: (context) => ForgotPassword());
       default:
         return _errorRoute();
     }

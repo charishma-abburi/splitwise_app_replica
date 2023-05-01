@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:splitwise_app_replica/Screens/Animations/spinners.dart';
 import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:splitwise_app_replica/src/authenticate/forgotpass.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -119,6 +121,16 @@ class _SignInState extends State<SignIn> {
                         });
                       },
                       obscureText: _obscureText,
+                    ),
+
+                    Container(
+                      height: 20.0,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, ForgotPassword.id);
+                      },
+                      child: Text("Forgot Password", style: TextStyle(color: colorTheme),)
                     ),
 
                     Container(
