@@ -1,3 +1,4 @@
+import 'package:splitwise_app_replica/constants.dart';
 import 'package:splitwise_app_replica/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -52,7 +53,8 @@ class _AuthenticateState extends State<Authenticate> {
                 style: TextButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(76, 187, 155, 1),
                   minimumSize: const Size(double.maxFinite, 40.0),
-                  elevation: 5.0
+                  elevation: 5.0,
+                  foregroundColor: Colors.white
                 ),
                 child: const Text(
                   "Sign Up",
@@ -72,7 +74,8 @@ class _AuthenticateState extends State<Authenticate> {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.white,
                   minimumSize: const Size(double.maxFinite, 40.0),
-                  elevation: 5.0
+                  elevation: 5.0,
+                  foregroundColor: colorTheme
                 ),
                 child: const Text(
                   "Sign In",
@@ -95,7 +98,8 @@ class _AuthenticateState extends State<Authenticate> {
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
                     minimumSize: const Size(double.maxFinite, 40.0),
-                    elevation: 5.0
+                    elevation: 5.0,
+                    foregroundColor: colorTheme
                 ),
                 label: const Text(
                   "Sign In with Google",

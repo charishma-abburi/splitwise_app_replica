@@ -154,37 +154,7 @@ class _RegisterState extends State<Register> {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            width: 200.0,
-                            child: TextFormField(
-                              maxLength: 10,
-                              keyboardType: TextInputType.phone,
-                              decoration: const InputDecoration(
-                                  labelText: 'Phone # (optional)',
-                                  contentPadding: EdgeInsets.only(
-                                      bottom: 0.0
-                                  ),
-                                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: colorTheme,
-                                          width: 2.0
-                                      )
-                                  )
-                              ),
 
-                              onChanged: (val) {
-                                setState(() {
-                                  phone = val;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
                       Container(
                         height: 30.0,
                       ),
@@ -200,13 +170,21 @@ class _RegisterState extends State<Register> {
                               borderRadius: BorderRadius.circular(5.0)
                             ),
                             width: 120.0,
+                            height: 50.0,
                             child: TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
+                              style: TextButton.styleFrom(
+                                foregroundColor: colorTheme
+                              ),
                               child: const Text(
                                 "Back",
+                                style: TextStyle(
+                                    color: colorTheme
+                                ),
                               ),
+
                             ),
                           ),
                           Container(
@@ -240,7 +218,7 @@ class _RegisterState extends State<Register> {
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: colorTheme,
-
+                                foregroundColor: Colors.white
                               ),
                               child: const Text(
                                 "Done",

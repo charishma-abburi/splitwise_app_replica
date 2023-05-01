@@ -133,10 +133,14 @@ class _SignInState extends State<SignIn> {
                               borderRadius: BorderRadius.circular(5.0)
                           ),
                           width: 120.0,
+                          height: 50.0,
                           child: TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
+                            style: TextButton.styleFrom(
+                              foregroundColor: colorTheme
+                            ),
                             child: const Text(
                               "Back",
                             ),
@@ -153,6 +157,7 @@ class _SignInState extends State<SignIn> {
                           width: 120.0,
                           height: 50.0,
                           child: TextButton(
+
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 dynamic result = await _auth
@@ -171,7 +176,7 @@ class _SignInState extends State<SignIn> {
                             },
                             style: TextButton.styleFrom(
                               backgroundColor: colorTheme,
-
+                              foregroundColor: Colors.white
                             ),
                             child: const Text(
                               "Sign in",
