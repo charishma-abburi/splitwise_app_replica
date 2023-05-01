@@ -27,6 +27,7 @@ class _AddFriendState extends State<AddFriend> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Add a friend'),
+          backgroundColor: Color.fromRGBO(76, 187, 155, 1),
         ),
         body: ListView(
           children: <Widget>[
@@ -52,7 +53,7 @@ class _AddFriendState extends State<AddFriend> {
                         flex: 6,
                         child: TextFormField(
                           decoration: const InputDecoration(
-                            hintText: 'enter email ...',
+                            hintText: 'Enter email ...',
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.greenAccent,
@@ -81,9 +82,9 @@ class _AddFriendState extends State<AddFriend> {
               // shift 10 unit left
               label: Text('Confirm', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(76, 187, 155, 1),
+                primary: Color.fromRGBO(76, 187, 155, 1),
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   // If the form is valid, display a snackbar. In the real world,
                   // you'd often call a server or save the information in a database.

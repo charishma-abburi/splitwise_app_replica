@@ -29,6 +29,7 @@ class _AddContributionState extends State<AddContribution> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Contribution'),
+        backgroundColor: Color.fromRGBO(76, 187, 155, 1),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
@@ -166,7 +167,7 @@ class _AddContributionState extends State<AddContribution> {
                 const SizedBox(width: 3),
                 Expanded(
                   child: DropdownButtonFormField(
-                    items: ["Me", "You", "Both"]
+                    items: ["Me"]
                         .map((category) => DropdownMenuItem(
                               value: category,
                               child: Text(category),
@@ -193,6 +194,7 @@ class _AddContributionState extends State<AddContribution> {
                             ))
                         .toList(),
                     decoration: const InputDecoration(
+                     
                     //  labelText: "Split",
                     ),
                     onChanged: (String? value) {},

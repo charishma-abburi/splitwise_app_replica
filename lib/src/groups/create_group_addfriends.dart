@@ -79,10 +79,11 @@ class _AddGroupPage extends State<BuildPage> {
       tag: 'createGroup',
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Add Members to the group"),
+          title: const Text("Add Members to the group.."),
+          backgroundColor: Color.fromRGBO(76, 187, 155, 1),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 35, 34, 34),
+              color: Color.fromRGBO(76, 187, 155, 1),
             ),
           ),
         ),
@@ -126,6 +127,7 @@ class _AddGroupPage extends State<BuildPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Color.fromRGBO(76, 187, 155, 1),
           heroTag: null,
           onPressed: () {
             if (_formKey.currentState!.validate()) {
@@ -138,7 +140,8 @@ class _AddGroupPage extends State<BuildPage> {
           },
           // Add your onPressed code here!
 
-          child: const Icon(Icons.keyboard_arrow_right_rounded, size: 40),
+          child: const Icon(Icons.keyboard_arrow_right_rounded, size: 40,
+         ),
         ),
       ),
     );
@@ -149,7 +152,7 @@ class _AddGroupPage extends State<BuildPage> {
         child: Card(
           key: ValueKey(friend['id']),
           elevation: 2,
-          color: val[friend['id']] ? Color.fromARGB(255, 49, 102, 196) : null,
+          color: val[friend['id']] ? Color.fromRGBO(76, 187, 155, 1) : null,
           child: ListTile(
             visualDensity: VisualDensity.comfortable,
             // increase size of this icon

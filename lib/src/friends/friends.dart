@@ -119,6 +119,7 @@ class _FriendsPageState extends State<FriendsBuild> {
         // Add your onPressed code here!
         label: const Text('Add Friend '),
         icon: const Icon(Icons.person_add),
+        backgroundColor: Color.fromRGBO(76, 187, 155, 1),
       ),
     );
   }

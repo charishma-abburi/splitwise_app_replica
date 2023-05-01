@@ -29,6 +29,7 @@ class _CreateGroup extends State<CreateGroup> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Group Name"),
+        backgroundColor: Color.fromRGBO(76, 187, 155, 1),
         actions: [
           IconButton(
             icon: Icon(Icons.check),

@@ -97,6 +97,7 @@ class _GroupState extends State<GroupsBuild> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('${group['name']}'),
+          backgroundColor: Color.fromRGBO(76, 187, 155, 1),
         ),
         body: Padding(
           padding: EdgeInsets.all(10),
@@ -127,6 +128,7 @@ class _GroupState extends State<GroupsBuild> {
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Color.fromRGBO(76, 187, 155, 1),
           heroTag: null,
           onPressed: () {
             Navigator.push(

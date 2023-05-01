@@ -56,3 +56,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+lib/mobile-app-user-guide-template.docx
+.gitignore
+lib/231170_UserManual.docx

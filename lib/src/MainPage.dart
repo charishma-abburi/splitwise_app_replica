@@ -14,8 +14,9 @@ class MainPage extends StatefulWidget {
   final String title = 's';
   final screens = [
     const GroupsPage(),
-    ExpenseManagementScreen(),
+    
     const FriendsPage(),
+    ExpenseManagementScreen(),
     const AccountPage(),
   ];
   @override
@@ -27,8 +28,9 @@ class _MainPageState extends State<MainPage> {
   String _title = 'Your Groups';
   final List<Widget> _screens = [
     const GroupsPage(),
-    ExpenseManagementScreen(),
+    
     const FriendsPage(),
+    ExpenseManagementScreen(),
     const AccountPage(),
   ];
   // @override
@@ -61,12 +63,12 @@ class _MainPageState extends State<MainPage> {
                   _title = 'Your Groups';
                 }
                 break;
-              case 1:
+              case 2:
                 {
                   _title = 'Recent Activity';
                 }
                 break;
-              case 2:
+              case 1:
                 {
                   _title = 'Your Friends';
                 }
@@ -86,12 +88,12 @@ class _MainPageState extends State<MainPage> {
             text: "Groups",
           ),
           GButton(
-            icon: Icons.show_chart,
-            text: "Activity",
-          ),
-          GButton(
             icon: Icons.person,
             text: "Friends",
+          ),
+          GButton(
+            icon: Icons.show_chart,
+            text: "Expense",
           ),
           GButton(
             icon: Icons.account_box,
