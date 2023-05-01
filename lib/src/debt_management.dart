@@ -71,10 +71,10 @@ class _DebtManagementScreenState extends State<DebtManagementScreen> {
 
   void _settleDebt(DocumentReference debtRef) {
     
-Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => UPIpayment()),
-    );
+// Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => UPIpaymen()),
+//     );
    
 }
 }
